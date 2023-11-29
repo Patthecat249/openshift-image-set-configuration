@@ -1,0 +1,1 @@
+# openshift-image-set-configuration
