@@ -1,0 +1,68 @@
+# oc mirror --config=./imageset-only-operators.yaml docker://patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata --skip-pruning --skip-missing --skip-cleanup
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+storageConfig:
+  registry:
+    imageURL: patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata
+    skipTLS: false
+mirror:
+  platform:
+    architectures:
+      - "amd64"
+  operators:
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.14
+    packages:
+    - name: advanced-cluster-management
+      channels:
+      - name: release-2.9
+    - name: compliance-operator
+      channels:
+      - name: stable
+    - name: ansible-automation-platform-operator
+      channels:
+      - name: stable-2.4-cluster-scoped
+    - name: ansible-cloud-addons-operator
+      channels:
+      - name: stable-2.4-cluster-scoped
+    - name: cluster-logging
+      channels:
+      - name: stable-5.8
+    - name: cluster-observability-operator
+      channels:
+      - name: development
+    - name: devspaces
+      channels:
+      - name: stable
+    - name: devworkspace-operator
+      channels:
+      - name: fast
+    - name: elasticsearch-operator
+      channels:
+      - name: stable-5.8
+    - name: local-storage-operator
+      channels: 
+      - name: stable
+    - name: loki-operator
+      channels: 
+      - name: stable-5.8
+    - name: ocs-client-operator
+      channels: 
+      - name: stable-4.14
+    - name: ocs-operator
+      channels: 
+      - name: stable-4.14
+    - name: odf-operator
+      channels: 
+      - name: stable-4.14
+    - name: openshift-gitops-operator
+      channels: 
+      - name: latest
+    - name: openshift-pipelines-operator-rh
+      channels: 
+      - name: latest
+    - name: quay-operator
+      channels: 
+      - name: stable-3.9
+    - name: web-terminal
+      channels: 
+      - name: fast
