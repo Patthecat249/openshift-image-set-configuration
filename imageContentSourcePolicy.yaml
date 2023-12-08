@@ -1,0 +1,48 @@
+---
+apiVersion: operator.openshift.io/v1alpha1
+kind: ImageContentSourcePolicy
+metadata:
+  labels:
+    operators.openshift.org/catalog: "true"
+  name: all-operators
+spec:
+  repositoryDigestMirrors:
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/rhacm2
+    source: registry.redhat.io/rhacm2
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/compliance
+    source: registry.redhat.io/compliance
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/rhel8
+    source: registry.redhat.io/rhel8
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/openshift4
+    source: registry.redhat.io/openshift4
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/devspaces
+    source: registry.redhat.io/devspaces
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/rhceph
+    source: registry.redhat.io/rhceph
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/ubi8-minimal
+    source: registry.redhat.io/ubi8-minimal
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/devworkspace
+    source: registry.redhat.io/devworkspace
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/ubi8
+    source: registry.redhat.io/ubi8
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/rhscl
+    source: registry.redhat.io/rhscl
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/odf4
+    source: registry.redhat.io/odf4
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/openshift-gitops-1
+    source: registry.redhat.io/openshift-gitops-1
+  - mirrors:
+    - patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata/rh-sso-7
+    source: registry.redhat.io/rh-sso-7
