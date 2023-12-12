@@ -1,0 +1,46 @@
+# export DOCKER_CONFIG=/root/image-mirrors-with-oc-mirror
+# oc mirror --config=./imageset-production.yaml docker://production.artifactory.home.local/v414 --skip-pruning --skip-missing --skip-cleanup
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+storageConfig:
+  registry:
+    imageURL: production.artifactory.home.local/v414
+    skipTLS: false
+mirror:
+  platform:
+    architectures:
+      - "amd64"
+    channels:
+    - name: stable-4.14
+      minVersion: 4.14.3
+      # maxVersion: 4.14.4
+      shortestPath: true
+      type: ocp
+  operators:
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.14
+    packages:
+    # RHACM
+    - name: advanced-cluster-management
+      channels:
+      - name: release-2.9
+        minVersion: 2.9.0
+    - name: multicluster-engine
+      channels:
+      - name: stable-2.3
+        minVersion: 2.3.0
+    # Compliance Operator
+    - name: compliance-operator
+      channels:
+      - name: stable
+    # DevSpaces
+    - name: devspaces
+      channels:
+      - name: stable
+    # OpenShift-Data-Foundation
+    - name: odf-operator
+      channels: 
+      - name: stable-4.14
+    # GitOps (ArgoCD)
+    - name: openshift-gitops-operator
+      channels: 
+      - name: latest
