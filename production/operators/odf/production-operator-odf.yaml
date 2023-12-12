@@ -1,0 +1,19 @@
+# export DOCKER_CONFIG=/root/image-mirrors-with-oc-mirror
+# oc mirror --config=./production-operator-odf.yaml docker://patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata --skip-pruning --skip-missing --skip-cleanup
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+storageConfig:
+  registry:
+    imageURL: production.artifactory.home.local/operators/
+    skipTLS: false
+mirror:
+  platform:
+    architectures:
+      - "amd64"
+  operators:
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.14
+    packages:
+    # OpenShift-Data-Foundation
+    - name: odf-operator
+      channels: 
+      - name: stable-4.14
