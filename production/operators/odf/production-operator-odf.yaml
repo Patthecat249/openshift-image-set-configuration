@@ -1,10 +1,10 @@
 # export DOCKER_CONFIG=/root/image-mirrors-with-oc-mirror
-# oc mirror --config=./production-operator-odf.yaml docker://patrick-local-docker-repo.artifactory.home.local/mirror/oc-mirror-metadata --skip-pruning --skip-missing --skip-cleanup
+# oc mirror --config=./production-operator-odf.yaml docker://production.artifactory.home.local/operators --skip-pruning --skip-missing --skip-cleanup
 kind: ImageSetConfiguration
 apiVersion: mirror.openshift.io/v1alpha2
 storageConfig:
   registry:
-    imageURL: production.artifactory.home.local/operators/
+    imageURL: production.artifactory.home.local/operators
     skipTLS: false
 mirror:
   platform:
