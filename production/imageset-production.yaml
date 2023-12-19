@@ -8,13 +8,14 @@ storageConfig:
     skipTLS: false
 mirror:
   platform:
+    graph: true
     architectures:
       - "amd64"
     channels:
     - name: stable-4.14
       minVersion: 4.14.3
       # maxVersion: 4.14.4
-      shortestPath: true
+      # shortestPath: true
       type: ocp
   operators:
   - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.14
@@ -24,10 +25,16 @@ mirror:
       channels:
       - name: release-2.9
         minVersion: 2.9.0
+      - name: release-2.8
+        minVersion: 2.8.0
     - name: multicluster-engine
       channels:
       - name: stable-2.3
         minVersion: 2.3.0
+      - name: stable-2.4
+    - name: multicluster-global-hub-operator-rh
+      channels: 
+      - name: release-1.0
     # Compliance Operator
     - name: compliance-operator
       channels:
@@ -38,9 +45,15 @@ mirror:
       - name: stable
     # OpenShift-Data-Foundation
     - name: odf-operator
-      channels: 
+      channels:
       - name: stable-4.14
     # GitOps (ArgoCD)
     - name: openshift-gitops-operator
-      channels: 
+      channels:
       - name: latest
+    # Cluster-Logging
+    - name: cluster-logging
+      channels:
+      - name: stable-5.8
+      - name: stable-5.7
+        minVersion: 5.7.3

@@ -692,6 +692,43 @@ VERSIONS
 2.8.3
 2.8.0
 ```
+# All Cluster-Logging Versions
+```bash
+[root@ocpbastion image-mirrors-with-oc-mirror]# oc-mirror list operators --version=4.14 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.14 --package=cluster-logging
+Logging to .oc-mirror.log
+NAME             DISPLAY NAME               DEFAULT CHANNEL
+cluster-logging  Red Hat OpenShift Logging  stable-5.8
+
+PACKAGE          CHANNEL     HEAD
+cluster-logging  stable      cluster-logging.v5.8.1
+cluster-logging  stable-5.7  cluster-logging.v5.7.9
+cluster-logging  stable-5.8  cluster-logging.v5.8.1
+[root@ocpbastion image-mirrors-with-oc-mirror]# oc-mirror list operators --version=4.14 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.14 --package=cluster-logging --channel=s
+table
+Logging to .oc-mirror.log
+VERSIONS
+5.8.0   
+5.8.1   
+[root@ocpbastion image-mirrors-with-oc-mirror]# oc-mirror list operators --version=4.14 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.14 --package=cluster-logging --channel=stable-5.7
+Logging to .oc-mirror.log
+VERSIONS
+5.7.6
+5.7.9
+5.7.1
+5.7.4
+5.7.3
+5.7.5
+5.7.7
+5.7.8
+5.7.0
+5.7.2
+[root@ocpbastion image-mirrors-with-oc-mirror]# oc-mirror list operators --version=4.14 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.14 --package=cluster-logging --channel=stable-5.8
+Logging to .oc-mirror.log
+VERSIONS
+5.8.0   
+5.8.1
+```
+
 
 # List available updates in the upgrade graph for releases and operators from upstream sources based on current state. A storage configuration must be specified to use this command.
 ```bash
