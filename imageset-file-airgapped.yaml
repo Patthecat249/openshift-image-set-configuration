@@ -1,0 +1,19 @@
+# How to Mirror the compliance Operator to the local file-system
+# Copy the content of the pull-secret file to $HOME/.docker/config.json
+# oc-mirror uses this credentials file for authentication
+# Download to the file-system: 
+## oc-mirror --config imageset-file.yaml file://mirror --ignore-history
+# Upload the content from the filesystem to the registry
+## oc adm catalog mirror file://redhat/redhat-operator-index:v4.12 REGISTRY/REPOSITORY
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+mirror:
+  platform:
+    architectures:
+      - "amd64"
+  operators:
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.12
+    packages:
+    - name: compliance-operator
+      channels:
+      - name: stable
