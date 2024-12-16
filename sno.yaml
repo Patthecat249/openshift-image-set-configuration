@@ -1,0 +1,63 @@
+# This is a mirror which runs on artifactory.home.local in /root/imagesetconfigurations/sno-clusters/
+# oc mirror --config=./sno.yaml docker://patrick.artifactory.home.local/mirror --skip-pruning --skip-missing --skip-cleanup
+
+# Login to Artifactory
+# mkdir -p /root/.docker/
+# touch /root/.docker/config.json
+# podman login patrick.artifactory.home.local -u admin
+# How to Mirror all images directly to artifactory.home.local
+# Copy the content of the pull-secret file to $HOME/.docker/config.json and add credentials of patrick.artifactory.home.local
+# oc-mirror uses this credentials file for authentication
+# Download to artifactory:
+# oc-mirror --config=./sno.yaml docker://patrick.artifactory.home.local/mirror --skip-pruning --skip-missing --skip-cleanup --ignore-history
+
+
+# - amq streams 2.6.0-2(stable)
+# - Kubernetes nmstate  Operator
+# - OpenShift Virtualization 4.16.10(stable)
+# - OADP Oeprator 1.3.1 (stable-1.3)
+
+# How to list available operator-images
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=amq-streams
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=kubernetes-nmstate-operator
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=kubevirt-hyperconverged
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=redhat-oadp-operator
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=compliance-operator
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+storageConfig:
+  registry:
+    imageURL: patrick.artifactory.home.local/mirror
+    skipTLS: false
+mirror:
+  platform:
+    channels:
+    - name: stable-4.16
+      minVersion: 4.16.24
+      maxVersion: 4.16.24
+      type: ocp
+    architectures:
+      - "amd64"
+  operators:
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.16
+    packages:
+    # AMQ-Streams Operator
+    - name: amq-streams
+      channels:
+      - name: stable
+    # Compliance Operator
+    - name: compliance-operator
+      channels:
+      - name: stable
+    # NMSTATE Operator
+    - name: kubernetes-nmstate-operator
+      channels:
+      - name: stable
+    # OpenShift Virtualization
+    - name: kubevirt-hyperconverged
+      channels:
+      - name: stable
+    # OADP-Operator
+    - name: redhat-oadp-operator
+      channels:
+      - name: stable-1.4
