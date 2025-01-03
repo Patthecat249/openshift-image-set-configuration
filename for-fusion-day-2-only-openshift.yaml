@@ -1,0 +1,21 @@
+# How to Mirror the compliance Operator to the local file-system
+# Copy the content of the pull-secret file to $HOME/.docker/config.json
+# oc-mirror uses this credentials file for authentication
+# Download to the file-system: 
+## oc-mirror --config for-fusion-day-2-only-openshift.yaml file:///root/oc-mirror/for-fusion-day-2-mirror-only-openshift --ignore-history
+## oc-mirror --config for-fusion-day-2-only-openshift.yaml file://mirror --ignore-history
+# Upload the content from the filesystem to the registry
+## oc mirror --from=./mirror_seq1_000000.tar docker://registry.example:5000 
+## Optional: oc adm catalog mirror file://redhat/redhat-operator-index:v4.12 REGISTRY/REPOSITORY
+
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+mirror:
+  platform:
+    channels:
+    - name: stable-4.13
+      minVersion: 4.13.41
+      maxVersion: 4.13.41
+      type: ocp
+    architectures:
+      - "amd64"      
