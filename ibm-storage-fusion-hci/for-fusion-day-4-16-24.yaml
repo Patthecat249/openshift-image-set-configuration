@@ -1,0 +1,52 @@
+# Copy the content of the pull-secret file to 
+# $HOME/.docker/config.json
+# oc-mirror uses this credentials file for authentication
+
+## Download to the file-system: 
+# oc-mirror --config for-fusion-day-4-16-24.yaml file:///root/oc-mirror/for-fusion-day-4-16-24 --ignore-history
+# oc-mirror --config for-fusion-day-4-16-24.yaml file:///root/oc-mirror/for-fusion-day-4-16-24 --skip-pruning --skip-missing --skip -cleanup --ignore-history
+# oc-mirror --config for-fusion-day-4-16-24.yaml file:///root/oc-mirror/for-fusion-day-4-16-24 --skip-pruning --skip-missing --skip -cleanup
+
+## Upload the content from the filesystem to the registry
+# oc mirror --from=./mirror_seq1_000000.tar docker://patrick.artifactory.home.local/mirror 
+
+# How to list available operator-images
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=amq-streams
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=kubernetes-nmstate-operator
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=kubevirt-hyperconverged
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=redhat-oadp-operator
+## oc-mirror list operators --version=4.16 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.16 --package=compliance-operator
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+mirror:
+  platform:
+    channels:
+    - name: stable-4.16
+      minVersion: 4.16.24
+      maxVersion: 4.16.24
+      type: ocp
+    architectures:
+      - "amd64"
+  operators:
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.14
+    packages:
+    # AMQ-Streams Operator
+    - name: amq-streams
+      channels:
+      - name: stable
+    # NMSTATE Operator
+    - name: kubernetes-nmstate-operator
+      channels:
+      - name: stable
+    # OpenShift Virtualization
+    - name: kubevirt-hyperconverged
+      channels:
+      - name: stable
+    # OADP-Operator
+    - name: redhat-oadp-operator
+      channels:
+      - name: stable-1.4
+    # Compliance Operator
+    - name: compliance-operator
+      channels:
+      - name: stable

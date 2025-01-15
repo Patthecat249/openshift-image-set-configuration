@@ -1,0 +1,57 @@
+### PREPARATION ###
+# Copy the content of the pull-secret file to 
+# $HOME/.docker/config.json
+# oc-mirror uses this credentials file for authentication
+
+### DOWNLOAD to the file-system: (Server with Internet-Access)
+# time oc-mirror --config ibm-storage-fusion-hci-openshift-4-13-41-and-operators.yaml file:///root/oc-mirror/ibm-storage-fusion-hci-openshift-4-13-41-and-operators --ignore-history
+# time oc-mirror --config ibm-storage-fusion-hci-openshift-4-13-41-and-operators.yaml file:///root/oc-mirror/ibm-storage-fusion-hci-openshift-4-13-41-and-operators --skip-pruning --skip-missing --skip -cleanup --ignore-history
+# time oc-mirror --config ibm-storage-fusion-hci-openshift-4-13-41-and-operators.yaml file:///root/oc-mirror/ibm-storage-fusion-hci-openshift-4-13-41-and-operators --skip-pruning --skip-missing --skip -cleanup
+
+### TRANSFER tar-file from local system to registry system via removable media, like USB-Stick
+# /root/oc-mirror/ibm-storage-fusion-hci-openshift-4-13-41-and-operators/mirror_seq1_000000.tar
+
+### UPLOAD the content from the filesystem to the registry (Registry-Server)
+# oc mirror --from=./mirror_seq1_000000.tar docker://patrick.artifactory.home.local/mirror 
+
+
+# How to list available operator-images
+## oc-mirror list operators --version=4.13 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.13 --package=amq-streams
+## oc-mirror list operators --version=4.13 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.13 --package=kubernetes-nmstate-operator
+## oc-mirror list operators --version=4.13 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.13 --package=kubevirt-hyperconverged
+## oc-mirror list operators --version=4.13 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.13 --package=redhat-oadp-operator
+## oc-mirror list operators --version=4.13 --catalog=registry.redhat.io/redhat/redhat-operator-index:v4.13 --package=compliance-operator
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+mirror:
+  platform:
+    channels:
+    - name: stable-4.13
+      minVersion: 4.13.41
+      maxVersion: 4.13.41
+      type: ocp
+    architectures:
+      - "amd64"
+  operators:
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.13
+    packages:
+    # AMQ-Streams Operator
+    - name: amq-streams
+      channels:
+      - name: stable
+    # NMSTATE Operator
+    - name: kubernetes-nmstate-operator
+      channels:
+      - name: stable
+    # OpenShift Virtualization
+    - name: kubevirt-hyperconverged
+      channels:
+      - name: stable
+    # OADP-Operator
+    - name: redhat-oadp-operator
+      channels:
+      - name: stable-1.4
+    # Compliance Operator
+    - name: compliance-operator
+      channels:
+      - name: stable
