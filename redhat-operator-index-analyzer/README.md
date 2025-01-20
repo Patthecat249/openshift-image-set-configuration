@@ -23,8 +23,8 @@ ls v4.16/configs/
 ## Advanced stuff
 ```bash
 # Iterate through alle OpenShift-Major-Versions and make all offline available
-for i in 4.13 4.14 4.15 4.16; do bash 01-make-index-list-offline-available.sh $i; done
+for i in 4.12 4.13 4.14 4.15 4.16; do bash 01-make-index-list-offline-available.sh $i; done
 
 # Iterate through all OpenShift-Major-Versions for the same operator and list details/infos about it
-for i in 4.13 4.14 4.15 4.16; do bash 02-get-infos-about-operator.sh $i kubernetes-nmstate-operator; done
+for i in 4.12 4.13 4.14 4.15 4.16; do bash 02-get-infos-about-operator.sh $i kubernetes-nmstate-operator; done
 ```
