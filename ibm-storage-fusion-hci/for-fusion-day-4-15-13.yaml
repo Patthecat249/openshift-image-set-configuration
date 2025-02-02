@@ -28,7 +28,7 @@ mirror:
     architectures:
       - "amd64"
   operators:
-  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.14
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.15
     packages:
     # AMQ-Streams Operator
     - name: amq-streams
