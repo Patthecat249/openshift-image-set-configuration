@@ -1,0 +1,24 @@
+# https://www.ibm.com/docs/en/fusion-hci-systems/2.9.x?topic=mii-mirroring-data-foundation-images-deployed-openshift-container-platform
+# Download to filesystem
+# oc-mirror --config ibm-fusion-data-foundation-4-16.yaml file:///root/oc-mirror/ibm-fusion-data-foundation-v4-16 --skip-pruning --skip-missing --skip-cleanup --ignore-history
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+# storageConfig:
+#   registry:
+#     imageURL: "$TARGET_PATH/isf-df-metadata:latest"
+#     skipTLS: true
+mirror:
+  operators:
+  - catalog: icr.io/cpopen/isf-data-foundation-catalog:v4.16
+    packages:
+      - name: "mcg-operator"
+      - name: "ocs-operator"
+      - name: "odf-csi-addons-operator"
+      - name: "odf-multicluster-orchestrator"
+      - name: "odf-operator"
+      - name: "odr-cluster-operator"
+      - name: "odr-hub-operator"
+      - name: "ocs-client-operator"
+      - name: "odf-prometheus-operator"
+      - name: "recipe"
+      - name: "rook-ceph-operator"
